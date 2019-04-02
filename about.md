@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
@@ -8,15 +8,4 @@ Tony Wu is often described as an ambitious and passionate learner with the willi
 
 Tony is excellent at understanding difficult concepts through research and self-study, and is motivated and self-driven. He has sound interpersonal skills, strong organisational skills and highly developed problem solving and technical skills, which are several reasons for his suitability and interest in contributing to the Information Technology industry. Please contact him directly at qwu.tony@gmail.com for any further information.
 
-<!-- This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll -->
