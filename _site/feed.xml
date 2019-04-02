@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T04:34:51-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T11:16:55-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;First Steps: Information Gathering&lt;/strong&gt;&lt;/p&gt;
 
@@ -110,4 +110,69 @@ Args /var/log/authlog: The argument that the less command can read
 
 &lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/19.png&quot; alt=&quot;root&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Then simply navigate to the root directory and cat flag.txt and we will have completed the machine! Thank you very much for reading this walkthrough and I’ll see you again next time!&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the walkthrough of FourAndSix: 2.01, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit FourAndSix (vulnhub link).</summary></entry></feed>
+&lt;p&gt;Then simply navigate to the root directory and cat flag.txt and we will have completed the machine! Thank you very much for reading this walkthrough and I’ll see you again next time!&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the walkthrough of FourAndSix: 2.01, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit FourAndSix (vulnhub link).</summary></entry><entry><title type="html">Seckids: Basic Introduction to Nmap</title><link href="http://localhost:4000/2019/04/02/what-is-nmap.html" rel="alternate" type="text/html" title="Seckids: Basic Introduction to Nmap" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/what-is-nmap</id><content type="html" xml:base="http://localhost:4000/2019/04/02/what-is-nmap.html">&lt;p&gt;Welcome to the first of the &lt;strong&gt;‘Security:Kids’&lt;/strong&gt; series where I try to explain many concepts of cyber security in a simplistic and interesting manner. This topic for this blog post is to introduce readers to &lt;strong&gt;Nmap&lt;/strong&gt;, otherwise known as the &lt;em&gt;Network Mapper&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Nmap/1.png&quot; alt=&quot;nmap logo&quot; width=&quot;350&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is Nmap?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;Network Mapper&lt;/em&gt; is a tool developed and used for:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Network Exploration&lt;/li&gt;
+  &lt;li&gt;Security Auditing&lt;/li&gt;
+  &lt;li&gt;Port Scanning&lt;/li&gt;
+  &lt;li&gt;Operating System and Version Detection&lt;/li&gt;
+  &lt;li&gt;Basic vulnerability scanning…and many more!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nmap is one of the oldest tools used in penetration testing, having just celebrated its 20th birthday on September 1st, 2017. It is still being actively developed despite its age, and continues to be a versatile and irreplaceable tool in a penetration tester’s arsenal.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Help Commands&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The simplest command when attempting to understand a new tool is to use the help function or the manual:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Basic help commands&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;--help&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Manual for nmap&lt;/span&gt;
+man nmap
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Basic Scan&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The most basic port scanning technique is to scan a single IP address using the default nmap command. It scans the 1000 most popular TCP ports and returns the output.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# The default (basic) port scanning command: nmap [IP Address]&lt;/span&gt;
+nmap 192.168.72.141
+
+&lt;span class=&quot;c&quot;&gt;# Output&lt;/span&gt;
+Starting Nmap 7.70 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; at 2019-04-02 11:00 EDT
+Nmap scan report &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;192.168.72.141
+Host is up &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.000095s latency&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Not shown: 996 closed ports &lt;span class=&quot;c&quot;&gt;# 4 open ports in the most popular 1000 ports&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# The state indicates whether the port is currently open closed or filtered. &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# The service is what is most commonly running on that port&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# or what nmap believes is running on that port. &lt;/span&gt;
+PORT    STATE SERVICE
+22/tcp  open  ssh 
+80/tcp  open  http
+110/tcp open  pop3
+143/tcp open  imap
+MAC Address: 00:0C:29:8A:AB:A8 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;VMware&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+Nmap &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;: 1 IP address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 host up&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; scanned &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;13.28 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Network Sweeping&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending &lt;strong&gt;ICMP ping requests&lt;/strong&gt; to each IP address in the network to discover which machines are currently available.&lt;/p&gt;
+
+&lt;p&gt;Some machines can be down, filtered or block ICMP requests which may cause the results to differ, but it is generally considered a good reference point to conduct a network sweeping scan.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# nmap -sn [IP Range]&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# sn flag: Ping Scan - disable port scan&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-sn&lt;/span&gt; 192.168.72.0-254
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;How to Download?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Visit the download page of the official website at &lt;a href=&quot;https://nmap.org/download.html&quot;&gt;https://nmap.org/download.html&lt;/a&gt; and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the first of the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. This topic for this blog post is to introduce readers to Nmap, otherwise known as the Network Mapper.</summary></entry></feed>
