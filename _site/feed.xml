@@ -1,13 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-01T21:51:35-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/04/01/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-04-01T21:38:22-04:00</published><updated>2019-04-01T21:38:22-04:00</updated><id>http://localhost:4000/jekyll/update/2019/04/01/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/04/01/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T00:41:47-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First Steps: Information Gathering&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;Our first step is to discover the network we are on using &lt;em&gt;ip r&lt;/em&gt;. This indicates that we are currently in the private network 192.168.72.0/24. This is because our virtual machine is in host-only mode for the purpose of this exercise.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/1.png&quot; alt=&quot;ip r&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+&lt;p&gt;A simple netdiscover -r 192.168.72.0/24 scan will reveal our vulnerable machine: 192.168.72.128.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/2.png&quot; alt=&quot;netdiscover scan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With the IP Address, we are able to perform an nmap scan of all the common TCP ports using the command nmap -sC -sV -A 192.168.72.128:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/3.png&quot; alt=&quot;nmap scan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mounting the Network File System&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The most interesting results from the scan is the NFS → Network File System. The Network File System allows a user or administrator of a system to mount a proportion of the file system onto a server. It allows other users or clients to access whatever is mounted through Remote Procedure Calls, which facilitates the communication between the client and the server. For more information, see: &lt;a href=&quot;https://searchenterprisedesktop.techtarget.com/definition/Network-File-System&quot;&gt;NFS explained&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We can use the showmount -e 192.168.72.128 command to query the server regarding more information about the NFS server. The -e flag shows the export list of the NFS server. In this case, the command reveals that the remote server allows the mounting of the /home/user/storage directory of the machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/4.png&quot; alt=&quot;showmount&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By creating a temporary folder /tmp/blah, and mounting the remote folder to the local temporary folder using mount -t nfs 192.168.72.128:/home/user/storage /tmp/blah, then navigating to the directory, we are shown that there is a backup.7z file.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Extracting the 7z File&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;It is possible to use the linux command 7za x backup.7z to extract the file and reveal its contents. However, the 7zip file is password protected, which means that the only method is to use a password cracker. The output of the results do reveal some interesting information about the contents of the compressed file, including the public and private keys. More on that later.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/5.png&quot; alt=&quot;7zip extract&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this case there are several methods to attempt to crack the 7 zip file. The most common method is use John the Ripper. This requires to extract the hash from the 7 zip file, using a 7z2john script:&lt;/p&gt;
+
+&lt;p&gt;The Perl Script: &lt;a href=&quot;https://github.com/koboi137/john/blob/master/7z2john.pl&quot;&gt;https://github.com/koboi137/john/blob/master/7z2john.pl&lt;/a&gt; (Confirmed to work)&lt;/p&gt;
+
+&lt;p&gt;The Python Script: &lt;a href=&quot;https://github.com/truongkma/ctf-tools/blob/master/John/run/7z2john.py&quot;&gt;https://github.com/truongkma/ctf-tools/blob/master/John/run/7z2john.py&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/6.png&quot; alt=&quot;7zip hash&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Perl script to create the hash: perl 7zjohn.pl backup.7z &amp;gt; backup.7z.hash. Note the hash continues for a lot of lines past this screenshot. To unhash using john, simply use john –format=7z backup.7z.hash to reveal the password: chocolate.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, it is also possible to use hashcat, as well as the 7z2hashcat perl script, located at: https://github.com/philsmd/7z2hashcat. You can also use cracx for Windows, as well as many online tools that are available for password cracking. Re-enter the password after the 7za x backup.7z command to extract the contents of the 7 zip file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/7.png&quot; alt=&quot;hello kitty&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Secure Shell Scripting&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The pictures are just ordinary images of Hello Kitty. The other two files however, are the public and private keys that allow for SSH into the remote server. We can concatenate the files to discover more about the keys:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/8.png&quot; alt=&quot;ssh keys&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It seems these keys are for the user user@fourandsix2. This credential allows us to attempt to SSH with the private key using ssh -i id_rsa user@192.168.72.128:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/9.png&quot; alt=&quot;passphrase&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, it seems that the authentication is rejected because the passphrase is not provided. The reason for this is probably because the private key is encrypted using a symmetric key derived from a passphrase. Therefore we will need to bruteforce the passphrase to be allowed SSH access.&lt;/p&gt;
+
+&lt;p&gt;Normally, ssh-keygen is used to create new public and private keys, but can also be used to dictionary attack and brute force SSH passphrases. The following command found in the help file is what we will need to create a simple script to offline dictionary attack the SSH id_rsa private key.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/10.png&quot; alt=&quot;ssh-keygen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The bash script takes each word in the most common 1575 passwords (found at: https://github.com/danielmiessler/SecLists/blob/master/Passwords/probable-v2-top1575.txt) inserts it into the -P parameter of the ssh-keygen command.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/11.png&quot; alt=&quot;bash script&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After running it, the passphrase is successfully revealed to be 12345678:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/12.png&quot; alt=&quot;running the script&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we can successfully SSH into the machine using the command from earlier:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/13.png&quot; alt=&quot;ssh success&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enumeration of Local Shell and Privilege Escalation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Since we know the machine has a linux operating system, we can conduct some basic enumeration of the box. Our ultimate objective is to obtain root privileges, and according to whoami we are only ‘user’. The id command shows that whilst ‘user’ has standard user and group privileges, it also as another security permission → wheel.&lt;/p&gt;
+
+&lt;p&gt;Wheel is a special user group in modern Unix systems that allows the control access of su (superuser) and sudo commands. This allows the user to gain additional system privileges that are most often restricted to these accounts. Generally, root is also in the wheel group. The most beneficial command in this case will be sudo, since su requires knowledge of the root password.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/14.png&quot; alt=&quot;sudo fail&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, sudo does not exist on this machine, but since this is an OpenBSD Linux machine, there is an alternative → doas.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/15.png&quot; alt=&quot;linux enum&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the above command find / -perm -4000 -type f 2&amp;gt;/dev/null, it can reveal SUID files, which are files that upon execution will set the user ID to be the owner of the file. /usr/bin/doas will be executed with root permissions.&lt;/p&gt;
+
+&lt;p&gt;We cannot run any command with doas however, because this is restricted by the system. We can check the doas configuration file located in /etc/doas.conf to find more information:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/16.png&quot; alt=&quot;doas configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The first line of the configuration file is exactly what is needed. It permits the user group to execute this command as root through the doas command. Furthermore, there is no password required (nopass), and the environment is kept the same (keepenv). Since it may be a bit complicated, we’ll break it down:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Permit
+Nopass: Does not require any authentication or password
+Keepenv: Keep the environment the same
+User as root: Grants root permissions for the execution of this command only
+Cmd /usr/bin/less: The less command that is allowed to be used
+Args /var/log/authlog: The argument that the less command can read
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/17.png&quot; alt=&quot;doas arguments&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Executing this command will open the authlog file in vim with root permissions:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/18.png&quot; alt=&quot;vim&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;However, it seems nothing can be written in it at the moment. This is because vim is in the incorrect mode. Simply enter ‘v’ into vim to change to visual mode, which allows for command inputs, and then either :shell or :!sh to exit the program and execute the respective shell.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/FourAndSix/19.png&quot; alt=&quot;root&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then simply navigate to the root directory and cat flag.txt and we will have completed the machine! Thank you very much for reading this walkthrough and I’ll see you again next time!&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the walkthrough of FourAndSix: 2.01, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit FourAndSix (vulnhub link).</summary></entry></feed>

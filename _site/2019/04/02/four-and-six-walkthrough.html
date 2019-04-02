@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>FourAndSix: 2.01 Walkthrough | Tony Wu</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="FourAndSix: 2.01 Walkthrough" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Welcome to the walkthrough of FourAndSix: 2.01, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit FourAndSix (vulnhub link)." />
+<meta property="og:description" content="Welcome to the walkthrough of FourAndSix: 2.01, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit FourAndSix (vulnhub link)." />
+<link rel="canonical" href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" />
+<meta property="og:url" content="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" />
+<meta property="og:site_name" content="Tony Wu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-02T00:00:00-04:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/04/02/four-and-six-walkthrough.html"},"url":"http://localhost:4000/2019/04/02/four-and-six-walkthrough.html","headline":"FourAndSix: 2.01 Walkthrough","dateModified":"2019-04-02T00:00:00-04:00","datePublished":"2019-04-02T00:00:00-04:00","description":"Welcome to the walkthrough of FourAndSix: 2.01, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit FourAndSix (vulnhub link).","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tony Wu" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Tony Wu</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/">Welcome to Tony&#39;s Blog!</a><a class="page-link" href="/personal/template:2019-04-01-welcome-to-jekyll.html">Welcome to Jekyll!</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">FourAndSix: 2.01 Walkthrough</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-04-02T00:00:00-04:00" itemprop="datePublished">Apr 2, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Welcome to the walkthrough of <strong>FourAndSix: 2.01</strong>, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit <a href="https://www.vulnhub.com/entry/fourandsix-201,266/">FourAndSix (vulnhub link)</a>.</p>
+
+<p><strong>First Steps: Information Gathering</strong></p>
+
+<p>Our first step is to discover the network we are on using <em>ip r</em>. This indicates that we are currently in the private network 192.168.72.0/24. This is because our virtual machine is in host-only mode for the purpose of this exercise.</p>
+
+<p><img src="/assets/FourAndSix/1.png" alt="ip r" /></p>
+
+<p>A simple netdiscover -r 192.168.72.0/24 scan will reveal our vulnerable machine: 192.168.72.128.</p>
+
+<p><img src="/assets/FourAndSix/2.png" alt="netdiscover scan" /></p>
+
+<p>With the IP Address, we are able to perform an nmap scan of all the common TCP ports using the command nmap -sC -sV -A 192.168.72.128:</p>
+
+<p><img src="/assets/FourAndSix/3.png" alt="nmap scan" /></p>
+
+<p><strong>Mounting the Network File System</strong></p>
+
+<p>The most interesting results from the scan is the NFS → Network File System. The Network File System allows a user or administrator of a system to mount a proportion of the file system onto a server. It allows other users or clients to access whatever is mounted through Remote Procedure Calls, which facilitates the communication between the client and the server. For more information, see: <a href="https://searchenterprisedesktop.techtarget.com/definition/Network-File-System">NFS explained</a>.</p>
+
+<p>We can use the showmount -e 192.168.72.128 command to query the server regarding more information about the NFS server. The -e flag shows the export list of the NFS server. In this case, the command reveals that the remote server allows the mounting of the /home/user/storage directory of the machine.</p>
+
+<p><img src="/assets/FourAndSix/4.png" alt="showmount" /></p>
+
+<p>By creating a temporary folder /tmp/blah, and mounting the remote folder to the local temporary folder using mount -t nfs 192.168.72.128:/home/user/storage /tmp/blah, then navigating to the directory, we are shown that there is a backup.7z file.</p>
+
+<p><strong>Extracting the 7z File</strong></p>
+
+<p>It is possible to use the linux command 7za x backup.7z to extract the file and reveal its contents. However, the 7zip file is password protected, which means that the only method is to use a password cracker. The output of the results do reveal some interesting information about the contents of the compressed file, including the public and private keys. More on that later.</p>
+
+<p><img src="/assets/FourAndSix/5.png" alt="7zip extract" /></p>
+
+<p>In this case there are several methods to attempt to crack the 7 zip file. The most common method is use John the Ripper. This requires to extract the hash from the 7 zip file, using a 7z2john script:</p>
+
+<p>The Perl Script: <a href="https://github.com/koboi137/john/blob/master/7z2john.pl">https://github.com/koboi137/john/blob/master/7z2john.pl</a> (Confirmed to work)</p>
+
+<p>The Python Script: <a href="https://github.com/truongkma/ctf-tools/blob/master/John/run/7z2john.py">https://github.com/truongkma/ctf-tools/blob/master/John/run/7z2john.py</a>.</p>
+
+<p><img src="/assets/FourAndSix/6.png" alt="7zip hash" /></p>
+
+<p>The Perl script to create the hash: perl 7zjohn.pl backup.7z &gt; backup.7z.hash. Note the hash continues for a lot of lines past this screenshot. To unhash using john, simply use john –format=7z backup.7z.hash to reveal the password: chocolate.</p>
+
+<p>Alternatively, it is also possible to use hashcat, as well as the 7z2hashcat perl script, located at: https://github.com/philsmd/7z2hashcat. You can also use cracx for Windows, as well as many online tools that are available for password cracking. Re-enter the password after the 7za x backup.7z command to extract the contents of the 7 zip file.</p>
+
+<p><img src="/assets/FourAndSix/7.png" alt="hello kitty" /></p>
+
+<p><strong>Secure Shell Scripting</strong></p>
+
+<p>The pictures are just ordinary images of Hello Kitty. The other two files however, are the public and private keys that allow for SSH into the remote server. We can concatenate the files to discover more about the keys:</p>
+
+<p><img src="/assets/FourAndSix/8.png" alt="ssh keys" /></p>
+
+<p>It seems these keys are for the user user@fourandsix2. This credential allows us to attempt to SSH with the private key using ssh -i id_rsa user@192.168.72.128:</p>
+
+<p><img src="/assets/FourAndSix/9.png" alt="passphrase" /></p>
+
+<p>Unfortunately, it seems that the authentication is rejected because the passphrase is not provided. The reason for this is probably because the private key is encrypted using a symmetric key derived from a passphrase. Therefore we will need to bruteforce the passphrase to be allowed SSH access.</p>
+
+<p>Normally, ssh-keygen is used to create new public and private keys, but can also be used to dictionary attack and brute force SSH passphrases. The following command found in the help file is what we will need to create a simple script to offline dictionary attack the SSH id_rsa private key.</p>
+
+<p><img src="/assets/FourAndSix/10.png" alt="ssh-keygen" /></p>
+
+<p>The bash script takes each word in the most common 1575 passwords (found at: https://github.com/danielmiessler/SecLists/blob/master/Passwords/probable-v2-top1575.txt) inserts it into the -P parameter of the ssh-keygen command.</p>
+
+<p><img src="/assets/FourAndSix/11.png" alt="bash script" /></p>
+
+<p>After running it, the passphrase is successfully revealed to be 12345678:</p>
+
+<p><img src="/assets/FourAndSix/12.png" alt="running the script" /></p>
+
+<p>Now we can successfully SSH into the machine using the command from earlier:</p>
+
+<p><img src="/assets/FourAndSix/13.png" alt="ssh success" /></p>
+
+<p><strong>Enumeration of Local Shell and Privilege Escalation</strong></p>
+
+<p>Since we know the machine has a linux operating system, we can conduct some basic enumeration of the box. Our ultimate objective is to obtain root privileges, and according to whoami we are only ‘user’. The id command shows that whilst ‘user’ has standard user and group privileges, it also as another security permission → wheel.</p>
+
+<p>Wheel is a special user group in modern Unix systems that allows the control access of su (superuser) and sudo commands. This allows the user to gain additional system privileges that are most often restricted to these accounts. Generally, root is also in the wheel group. The most beneficial command in this case will be sudo, since su requires knowledge of the root password.</p>
+
+<p><img src="/assets/FourAndSix/14.png" alt="sudo fail" /></p>
+
+<p>Unfortunately, sudo does not exist on this machine, but since this is an OpenBSD Linux machine, there is an alternative → doas.</p>
+
+<p><img src="/assets/FourAndSix/15.png" alt="linux enum" /></p>
+
+<p>From the above command find / -perm -4000 -type f 2&gt;/dev/null, it can reveal SUID files, which are files that upon execution will set the user ID to be the owner of the file. /usr/bin/doas will be executed with root permissions.</p>
+
+<p>We cannot run any command with doas however, because this is restricted by the system. We can check the doas configuration file located in /etc/doas.conf to find more information:</p>
+
+<p><img src="/assets/FourAndSix/16.png" alt="doas configuration" /></p>
+
+<p>The first line of the configuration file is exactly what is needed. It permits the user group to execute this command as root through the doas command. Furthermore, there is no password required (nopass), and the environment is kept the same (keepenv). Since it may be a bit complicated, we’ll break it down:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Permit
+Nopass: Does not require any authentication or password
+Keepenv: Keep the environment the same
+User as root: Grants root permissions for the execution of this command only
+Cmd /usr/bin/less: The less command that is allowed to be used
+Args /var/log/authlog: The argument that the less command can read
+</code></pre></div></div>
+
+<p><img src="/assets/FourAndSix/17.png" alt="doas arguments" /></p>
+
+<p>Executing this command will open the authlog file in vim with root permissions:</p>
+
+<p><img src="/assets/FourAndSix/18.png" alt="vim" /></p>
+
+<p>However, it seems nothing can be written in it at the moment. This is because vim is in the incorrect mode. Simply enter ‘v’ into vim to change to visual mode, which allows for command inputs, and then either :shell or :!sh to exit the program and execute the respective shell.</p>
+
+<p><img src="/assets/FourAndSix/19.png" alt="root" /></p>
+
+<p>Then simply navigate to the root directory and cat flag.txt and we will have completed the machine! Thank you very much for reading this walkthrough and I’ll see you again next time!</p>
+
+  </div><a class="u-url" href="/2019/04/02/four-and-six-walkthrough.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tony Wu</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Tony Wu</li><li><a class="u-email" href="mailto:qwu.tony@gmail.com">qwu.tony@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/qwutony"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">qwutony</span></a></li><li><a href="https://www.twitter.com/Katsura63794843"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">Katsura63794843</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Just a student with an interest in cyber security and software development.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
