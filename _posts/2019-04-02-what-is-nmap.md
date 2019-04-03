@@ -95,7 +95,7 @@ nmap -p 1-1024 [IP Address]
 
 Here is a common example of how to use nmap in penetration testing engagements:
 
-1. Discovering more information about a completely unknown machine
+*Discovering more information about a completely unknown machine*
 
 ```shell
 # First, use a connect scan of the most common 1000 ports
@@ -109,7 +109,7 @@ nmap -sT -p- [IP Address] -oG [Output File]
 
 # The grepable file can be used in scripts for further enumeration.
 ``` 
-2. Network Sweeping
+*Network Sweeping*
 
 In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending **ICMP ping requests** to each IP address in the network to discover which machines are currently available.
 
@@ -122,7 +122,7 @@ nmap -sn 192.168.72.0-254 -oA [Output File]
 ```
 If the output is in greppable format (-oG), some operations can be performed on it to compile all the IP addresses in a format that can be used in vulnerability scanning.
 
-3. Script Scanning
+*Script Scanning*
 
 All the scripts available to Nmap is located in the /usr/share/nmap/scripts directory (Kali Linux). The script files are in .nse format, which stands for the Nmap Scripting Engine. The NSE allows users to create and share their own scripts, all of which aim to enhance the performance of networking tasks.
 
