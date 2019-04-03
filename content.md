@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Content
+title: List of Contents
 permalink: /content/
 ---
 <ul>

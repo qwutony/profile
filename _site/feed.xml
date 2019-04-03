@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T21:45:46-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T00:57:40-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">Seckids: Basic Introduction to Cross-site Scripting (XSS)</title><link href="http://localhost:4000/2019/04/03/what-is-xss.html" rel="alternate" type="text/html" title="Seckids: Basic Introduction to Cross-site Scripting (XSS)" /><published>2019-04-03T00:00:00-04:00</published><updated>2019-04-03T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/03/what-is-xss</id><content type="html" xml:base="http://localhost:4000/2019/04/03/what-is-xss.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;First Steps: Information Gathering&lt;/strong&gt;&lt;/p&gt;
 
@@ -127,6 +127,8 @@ Args /var/log/authlog: The argument that the less command can read
 
 &lt;p&gt;Nmap is one of the oldest tools used in penetration testing, having just celebrated its 20th birthday on September 1st, 2017. It is still being actively developed despite its age, and continues to be a versatile and irreplaceable tool in a penetration tester’s arsenal.&lt;/p&gt;
 
+&lt;p&gt;Please note: this post mainly focuses on the Nmap tool that is available on Linux.&lt;/p&gt;
+
 &lt;p&gt;&lt;strong&gt;Help Commands&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;The simplest command when attempting to understand a new tool is to use the help function or the manual:&lt;/p&gt;
@@ -183,6 +185,7 @@ MAC Address: 00:0C:29:8A:AB:A8 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;VMw
 
 Nmap &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;: 1 IP address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 host up&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; scanned &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;13.28 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;Since the default scan only scans the most common ports, the amount of traffic it generates, in addition to the time taken is minimal. However, in circumstances simply scanning the common ports do not reveal the complete picture of all the services that are running. Thus, it is recommended to do a &lt;strong&gt;full port scan&lt;/strong&gt; using the &lt;em&gt;-p&lt;/em&gt; flag to ensure that other ports are accounted for. This flag can also allow for single or ranged port scanning, as shown below:&lt;/p&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Syntax for full port scans&lt;/span&gt;
@@ -195,36 +198,182 @@ nmap &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 80 &lt;span class=&quot;o&
 &lt;span class=&quot;c&quot;&gt;# Scanning a range of ports&lt;/span&gt;
 nmap &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 1-1024 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP Address]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Scenario-based Port Scanning&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Below are some common examples of how to use nmap in penetration testing engagements:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scenario-based Scanning&lt;/strong&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Discovering more information about a completely unknown machine
-```shell
-    &lt;h1 id=&quot;first-use-a-connect-scan-of-the-most-common-1000-ports&quot;&gt;First, use a connect scan of the most common 1000 ports&lt;/h1&gt;
-    &lt;p&gt;nmap -sT -A [IP Address] -oG [Output File Name]&lt;/p&gt;
-    &lt;h1 id=&quot;-st-connect-scan&quot;&gt;-sT: Connect Scan&lt;/h1&gt;
-    &lt;h1 id=&quot;-a-all---os-and-version-detection-script-scans-and-traceroute&quot;&gt;-A: All -&amp;gt; OS and version detection, script scans and traceroute&lt;/h1&gt;
-    &lt;h1 id=&quot;-og-output-results-to-a-file-that-is-grepable-linux&quot;&gt;-oG: Output results to a file that is grepable (linux)&lt;/h1&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Here is a common example of how to use nmap in penetration testing engagements:&lt;/p&gt;
 
-&lt;h1 id=&quot;afterwards-use-a-deeper-scan-to-enumerate-all-the-ports&quot;&gt;Afterwards, use a deeper scan to enumerate all the ports&lt;/h1&gt;
-&lt;p&gt;nmap -sT -p- [IP Address] -oG [Output File Name]&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-**Network Sweeping**
+&lt;p&gt;&lt;em&gt;Discovering more information about a completely unknown machine&lt;/em&gt;&lt;/p&gt;
 
-In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending **ICMP ping requests** to each IP address in the network to discover which machines are currently available.
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# First, use a connect scan of the most common 1000 ports&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-sT&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP Address] &lt;span class=&quot;nt&quot;&gt;-oG&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Output File]
+&lt;span class=&quot;c&quot;&gt;# -sT: Connect Scan&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# -A: All -&amp;gt; OS and version detection, script scans and traceroute&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# -oG: Output results to a file that is grepable (linux)&lt;/span&gt;
 
-Some machines can be down, filtered or block ICMP requests which may cause the results to differ, but it is generally considered a good reference point to conduct a network sweeping scan.
+&lt;span class=&quot;c&quot;&gt;# Afterwards, use a deeper scan to enumerate all the ports&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-sT&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p-&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP Address] &lt;span class=&quot;nt&quot;&gt;-oG&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Output File]
 
-```shell
-# nmap -sn [IP Range]
-# sn flag: Ping Scan - disable port scan
-nmap -sn 192.168.72.0-254
+&lt;span class=&quot;c&quot;&gt;# The grepable file can be used in scripts for further enumeration.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Network Sweeping&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending &lt;strong&gt;ICMP ping requests&lt;/strong&gt; to each IP address in the network to discover which machines are currently available.&lt;/p&gt;
+
+&lt;p&gt;Some machines can be down, filtered or block ICMP requests which may cause the results to differ, but it is generally considered a good reference point to conduct a network sweeping scan.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# -sn: Ping Scan - disable port scan&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# -oA: Outputs the result in all formats (ideally should be specific)&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-sn&lt;/span&gt; 192.168.72.0-254 &lt;span class=&quot;nt&quot;&gt;-oA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Output File]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;If the output is in greppable format (-oG), some operations can be performed on it to compile all the IP addresses in a format that can be used in vulnerability scanning.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Script Scanning&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;All the scripts available to Nmap is located in the /usr/share/nmap/scripts directory (Kali Linux). The script files are in .nse format, which stands for the Nmap Scripting Engine. The NSE allows users to create and share their own scripts, all of which aim to enhance the performance of networking tasks.&lt;/p&gt;
+
+&lt;p&gt;It is recommended to use the &lt;em&gt;–script-updatedb&lt;/em&gt; flag to update the database before using.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Find scripts that are useful for the circumstance&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-la&lt;/span&gt; /usr/share/nmap/scripts | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;keyword]
+
+&lt;span class=&quot;c&quot;&gt;# An example syntax of scripting&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-iL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;input file] &lt;span class=&quot;nt&quot;&gt;--script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;list of scripts] &lt;span class=&quot;nt&quot;&gt;-oG&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;output file]
+&lt;span class=&quot;c&quot;&gt;# -iL: insert input file if IP range&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# --script=: script notation&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# list of scripts: comma separated full names of scripts&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#                  can also use * wild card notation&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;How to Download?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Visit the download page of the official website at &lt;a href=&quot;https://nmap.org/download.html&quot;&gt;https://nmap.org/download.html&lt;/a&gt; and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the first of the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. This topic for this blog post is to introduce readers to Nmap, otherwise known as the Network Mapper.</summary></entry></feed>
+&lt;p&gt;Visit the download page of the official website at &lt;a href=&quot;https://nmap.org/download.html&quot;&gt;https://nmap.org/download.html&lt;/a&gt; and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).&lt;/p&gt;
+
+&lt;p&gt;Thank you for visiting my website! I will be posting more content about Nmap in the future so stay tuned!&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the first of the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. This topic for this blog post is to introduce readers to Nmap, otherwise known as the Network Mapper.</summary></entry><entry><title type="html">Droopy: v0.2 Walkthrough</title><link href="http://localhost:4000/2019/04/01/droopy-walkthrough.html" rel="alternate" type="text/html" title="Droopy: v0.2 Walkthrough" /><published>2019-04-01T00:00:00-04:00</published><updated>2019-04-01T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/01/droopy-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/01/droopy-walkthrough.html">&lt;p&gt;&lt;strong&gt;This post is an older post from the beginning of my cyber security studies, about 3 months ago&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Welcome to the walkthrough about &lt;strong&gt;Droopy&lt;/strong&gt;, a vulnerable boot2root machine that is available on Vulnhub &lt;a href=&quot;https://www.vulnhub.com/entry/droopy-v02,143/&quot;&gt; Droopy (vulnhub link)&lt;/a&gt;. This is the methodology of how I successfully obtained root permissions on the Droopy virtual machine, and obtain the flag that was hidden after getting root. Let’s begin!&lt;/p&gt;
+
+&lt;p&gt;Firstly, we find our IP address using &lt;em&gt;ifconfig&lt;/em&gt; and &lt;em&gt;ip r&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;A simple netdiscover scan (&lt;em&gt;netdiscover -r 192.168.72.0/24&lt;/em&gt;) then revealed all the other addresses on the network. All the machines are on the local host-only network, so anything caught by the network scanners will either by my machine or the virtual machine or the local gateway.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/1.png&quot; alt=&quot;netdiscover scan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It seems like the vulnerable machine has an IP address of 192.168.72.130. We should then use a &lt;em&gt;nmap -Pn -v [IP Address]&lt;/em&gt; scan.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/2.png&quot; alt=&quot;nmap scan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The nmap scan revealed that the only port open after scanning the first 1000 common ports is port 80 (HTTP).&lt;/p&gt;
+
+&lt;p&gt;We’ll run a deeper nmap scan using &lt;em&gt;nmap -sV -A -v [IP Address]&lt;/em&gt; but for now we’ll explore more into the HTTP port. A &lt;em&gt;dirb&lt;/em&gt; (directory buster) scan should reveal any hidden URLs and potential directories:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/3.png&quot; alt=&quot;dirb scan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(There is more to this scan, but the image is cropped because the other parts are irrelevant. Also, because of some issues with the server I have to redownload the VM, which means the IP address has changed.)&lt;/p&gt;
+
+&lt;p&gt;Let’s have a look at the robots.txt file:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/4.png&quot; alt=&quot;robots&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are some interesting directories in this. The /includes/ directory has a lot of other subdirectories which have all the files to the website.&lt;/p&gt;
+
+&lt;p&gt;The website by the way, is a simple Drupal web server, which is a content management system - more on that later. A navigation through the URLs in robots.txt didn’t yield me much, so I moved on.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/5.png&quot; alt=&quot;cmsmap&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once I had discovered that the web server was running on a Drupal CMS engine, I decided to use CMSmap to do some further enumeration of the server.&lt;/p&gt;
+
+&lt;p&gt;The most interesting pieces of information was that the server is run using Apache, PHP and Drupal 7.30. Drupal 7.3 is interesting because generally CMS has many vulnerabilities. I searched it up on CVE and turns out there are a lot of vulnerabilities.&lt;/p&gt;
+
+&lt;p&gt;The most interesting one is the first one because it allows for remote code execution. We want to create a limited shell on the server, so remote code execution is the best idea.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/6.png&quot; alt=&quot;exploits&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After trying this for a while, I realised that it doesn’t seem to work. After a while I decided to give something else a try.&lt;/p&gt;
+
+&lt;p&gt;So while I was reading into that, I was a little distracted and thought that it would be a good idea to use Metasploit to infiltrate the system.&lt;/p&gt;
+
+&lt;p&gt;I opened msfconsole and searched for Drupal related exploits. The Drupalgeddon 2 allows for remote code execution so let’s give it a try.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/7.png&quot; alt=&quot;metasploit&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So after configuring the settings for the exploit, I tried to activate it but it failed repeatedly. 
+After being unable to figure it out, I decided to change to another method.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/8.png&quot; alt=&quot;failed exploit&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Searching around the internet again, I realised that there was a possible SQL Injection that allowed creating an admin user on the server. 
+It was a python script. I decided to give it a try:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/9.png&quot; alt=&quot;drupal sql&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I succeeded in creating another account, and then logged into the system. After awhile I found the original admin - drupaladmin, and decided to take over his account for fun:&lt;/p&gt;
+
+&lt;p&gt;After navigating around the website, I noticed that it is possible to execute PHP code from the website.&lt;/p&gt;
+
+&lt;p&gt;It required changing some of the admin settings to allow for PHP code to be allowed on the webpage. I downloaded the code for a reverse shell and pasted it in the body of an article to be executed:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/10.png&quot; alt=&quot;drupaladmin&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This allowed for the creation of a web shell, which can then be redirected back to create a shell.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/11.png&quot; alt=&quot;listener&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/12.png&quot; alt=&quot;shell&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Success! This allowed the creation of a limited reverse shell on my computer, which I used to navigate around.&lt;/p&gt;
+
+&lt;p&gt;The commands that I typed to enumerate the system included:&lt;/p&gt;
+
+&lt;p&gt;Uname -a (revealed that it was a droopy linux kernel)
+Cat /etc/passwd (showed some username)
+Whoami (www-data)
+Cat /proc/version
+Cat /etc/issue
+Ps aux (found that there is netcat on the system, which turns out to be useless)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/13.png&quot; alt=&quot;shell2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I tried to find some vulnerabilities using netcat, cron and apache, however they didn’t work.&lt;/p&gt;
+
+&lt;p&gt;I decided maybe there were some kernel-related vulnerabilities that will allow for privilege escalation, so I searched the name of the kernel.&lt;/p&gt;
+
+&lt;p&gt;I downloaded the exploit and transferred it to the /tmp folder of the server using netcat -lp [PORT] &amp;gt; file. 
+It was important to transfer to the /tmp folder because this directory has execute permissions for the limited shell user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/14.png&quot; alt=&quot;privesc&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, the SHELL file could not be executed using ./SHELL no matter how much I tried. 
+It seems like the shell that was uploaded to the website has limited functionalities, so we found another PHP reverse shell that was more capable. This allowed us to execute the shell, and obtain root!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/15.png&quot; alt=&quot;success&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/16.png&quot; alt=&quot;root&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now it is time to locate the flag. After a while of locating, I found a mail with a clue that seems to point at using the rockyou wordlist to bruteforce a password. 
+Then I found the dave.tc file that is located in the /root home directory.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/17.png&quot; alt=&quot;mail&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I created a simple python server to transfer the dave.tc file onto my own computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/18.png&quot; alt=&quot;simpleserver&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After a long time of research, I discovered that the .tc file extension is truecrypt, and the password can be cracked using truecrack.&lt;/p&gt;
+
+&lt;p&gt;The clues from the www-data file indicates that the password is in the rockyou.txt file that has academy in the name. After a while of searching and using truecrack, the password was found.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/19.png&quot; alt=&quot;dictionary attack&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The output of the file was in /dev/mapper. I used the mount function to mount the file into a new directory in the /mnt folder. 
+Opening the folder resulted in three files and a secret file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/20.png&quot; alt=&quot;mount&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After probing a bit, in the directory .secret/.top was the hidden flag!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/21.png&quot; alt=&quot;flag&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Using cat flag.txt we revealed the flag and completed the challenge! Thank you for visiting and hope it helped!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/22.png&quot; alt=&quot;flag2&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">This post is an older post from the beginning of my cyber security studies, about 3 months ago</summary></entry></feed>

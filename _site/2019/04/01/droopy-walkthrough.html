@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>Droopy: v0.2 Walkthrough | Tony Wu</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Droopy: v0.2 Walkthrough" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This post is an older post from the beginning of my cyber security studies, about 3 months ago" />
+<meta property="og:description" content="This post is an older post from the beginning of my cyber security studies, about 3 months ago" />
+<link rel="canonical" href="http://localhost:4000/2019/04/01/droopy-walkthrough.html" />
+<meta property="og:url" content="http://localhost:4000/2019/04/01/droopy-walkthrough.html" />
+<meta property="og:site_name" content="Tony Wu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-01T00:00:00-04:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/04/01/droopy-walkthrough.html"},"@type":"BlogPosting","url":"http://localhost:4000/2019/04/01/droopy-walkthrough.html","dateModified":"2019-04-01T00:00:00-04:00","datePublished":"2019-04-01T00:00:00-04:00","headline":"Droopy: v0.2 Walkthrough","description":"This post is an older post from the beginning of my cyber security studies, about 3 months ago","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tony Wu" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Tony Wu</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/content/">List of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Droopy: v0.2 Walkthrough</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-04-01T00:00:00-04:00" itemprop="datePublished">Apr 1, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><strong>This post is an older post from the beginning of my cyber security studies, about 3 months ago</strong></p>
+
+<p>Welcome to the walkthrough about <strong>Droopy</strong>, a vulnerable boot2root machine that is available on Vulnhub <a href="https://www.vulnhub.com/entry/droopy-v02,143/"> Droopy (vulnhub link)</a>. This is the methodology of how I successfully obtained root permissions on the Droopy virtual machine, and obtain the flag that was hidden after getting root. Let’s begin!</p>
+
+<p>Firstly, we find our IP address using <em>ifconfig</em> and <em>ip r</em>.</p>
+
+<p>A simple netdiscover scan (<em>netdiscover -r 192.168.72.0/24</em>) then revealed all the other addresses on the network. All the machines are on the local host-only network, so anything caught by the network scanners will either by my machine or the virtual machine or the local gateway.</p>
+
+<p><img src="/assets/Droopy/1.png" alt="netdiscover scan" /></p>
+
+<p>It seems like the vulnerable machine has an IP address of 192.168.72.130. We should then use a <em>nmap -Pn -v [IP Address]</em> scan.</p>
+
+<p><img src="/assets/Droopy/2.png" alt="nmap scan" /></p>
+
+<p>The nmap scan revealed that the only port open after scanning the first 1000 common ports is port 80 (HTTP).</p>
+
+<p>We’ll run a deeper nmap scan using <em>nmap -sV -A -v [IP Address]</em> but for now we’ll explore more into the HTTP port. A <em>dirb</em> (directory buster) scan should reveal any hidden URLs and potential directories:</p>
+
+<p><img src="/assets/Droopy/3.png" alt="dirb scan" /></p>
+
+<p>(There is more to this scan, but the image is cropped because the other parts are irrelevant. Also, because of some issues with the server I have to redownload the VM, which means the IP address has changed.)</p>
+
+<p>Let’s have a look at the robots.txt file:</p>
+
+<p><img src="/assets/Droopy/4.png" alt="robots" /></p>
+
+<p>There are some interesting directories in this. The /includes/ directory has a lot of other subdirectories which have all the files to the website.</p>
+
+<p>The website by the way, is a simple Drupal web server, which is a content management system - more on that later. A navigation through the URLs in robots.txt didn’t yield me much, so I moved on.</p>
+
+<p><img src="/assets/Droopy/5.png" alt="cmsmap" /></p>
+
+<p>Once I had discovered that the web server was running on a Drupal CMS engine, I decided to use CMSmap to do some further enumeration of the server.</p>
+
+<p>The most interesting pieces of information was that the server is run using Apache, PHP and Drupal 7.30. Drupal 7.3 is interesting because generally CMS has many vulnerabilities. I searched it up on CVE and turns out there are a lot of vulnerabilities.</p>
+
+<p>The most interesting one is the first one because it allows for remote code execution. We want to create a limited shell on the server, so remote code execution is the best idea.</p>
+
+<p><img src="/assets/Droopy/6.png" alt="exploits" /></p>
+
+<p>After trying this for a while, I realised that it doesn’t seem to work. After a while I decided to give something else a try.</p>
+
+<p>So while I was reading into that, I was a little distracted and thought that it would be a good idea to use Metasploit to infiltrate the system.</p>
+
+<p>I opened msfconsole and searched for Drupal related exploits. The Drupalgeddon 2 allows for remote code execution so let’s give it a try.</p>
+
+<p><img src="/assets/Droopy/7.png" alt="metasploit" /></p>
+
+<p>So after configuring the settings for the exploit, I tried to activate it but it failed repeatedly. 
+After being unable to figure it out, I decided to change to another method.</p>
+
+<p><img src="/assets/Droopy/8.png" alt="failed exploit" /></p>
+
+<p>Searching around the internet again, I realised that there was a possible SQL Injection that allowed creating an admin user on the server. 
+It was a python script. I decided to give it a try:</p>
+
+<p><img src="/assets/Droopy/9.png" alt="drupal sql" /></p>
+
+<p>I succeeded in creating another account, and then logged into the system. After awhile I found the original admin - drupaladmin, and decided to take over his account for fun:</p>
+
+<p>After navigating around the website, I noticed that it is possible to execute PHP code from the website.</p>
+
+<p>It required changing some of the admin settings to allow for PHP code to be allowed on the webpage. I downloaded the code for a reverse shell and pasted it in the body of an article to be executed:</p>
+
+<p><img src="/assets/Droopy/10.png" alt="drupaladmin" /></p>
+
+<p>This allowed for the creation of a web shell, which can then be redirected back to create a shell.</p>
+
+<p><img src="/assets/Droopy/11.png" alt="listener" /></p>
+
+<p><img src="/assets/Droopy/12.png" alt="shell" /></p>
+
+<p>Success! This allowed the creation of a limited reverse shell on my computer, which I used to navigate around.</p>
+
+<p>The commands that I typed to enumerate the system included:</p>
+
+<p>Uname -a (revealed that it was a droopy linux kernel)
+Cat /etc/passwd (showed some username)
+Whoami (www-data)
+Cat /proc/version
+Cat /etc/issue
+Ps aux (found that there is netcat on the system, which turns out to be useless)</p>
+
+<p><img src="/assets/Droopy/13.png" alt="shell2" /></p>
+
+<p>I tried to find some vulnerabilities using netcat, cron and apache, however they didn’t work.</p>
+
+<p>I decided maybe there were some kernel-related vulnerabilities that will allow for privilege escalation, so I searched the name of the kernel.</p>
+
+<p>I downloaded the exploit and transferred it to the /tmp folder of the server using netcat -lp [PORT] &gt; file. 
+It was important to transfer to the /tmp folder because this directory has execute permissions for the limited shell user.</p>
+
+<p><img src="/assets/Droopy/14.png" alt="privesc" /></p>
+
+<p>Unfortunately, the SHELL file could not be executed using ./SHELL no matter how much I tried. 
+It seems like the shell that was uploaded to the website has limited functionalities, so we found another PHP reverse shell that was more capable. This allowed us to execute the shell, and obtain root!</p>
+
+<p><img src="/assets/Droopy/15.png" alt="success" /></p>
+
+<p><img src="/assets/Droopy/16.png" alt="root" /></p>
+
+<p>Now it is time to locate the flag. After a while of locating, I found a mail with a clue that seems to point at using the rockyou wordlist to bruteforce a password. 
+Then I found the dave.tc file that is located in the /root home directory.</p>
+
+<p><img src="/assets/Droopy/17.png" alt="mail" /></p>
+
+<p>I created a simple python server to transfer the dave.tc file onto my own computer.</p>
+
+<p><img src="/assets/Droopy/18.png" alt="simpleserver" /></p>
+
+<p>After a long time of research, I discovered that the .tc file extension is truecrypt, and the password can be cracked using truecrack.</p>
+
+<p>The clues from the www-data file indicates that the password is in the rockyou.txt file that has academy in the name. After a while of searching and using truecrack, the password was found.</p>
+
+<p><img src="/assets/Droopy/19.png" alt="dictionary attack" /></p>
+
+<p>The output of the file was in /dev/mapper. I used the mount function to mount the file into a new directory in the /mnt folder. 
+Opening the folder resulted in three files and a secret file.</p>
+
+<p><img src="/assets/Droopy/20.png" alt="mount" /></p>
+
+<p>After probing a bit, in the directory .secret/.top was the hidden flag!</p>
+
+<p><img src="/assets/Droopy/21.png" alt="flag" /></p>
+
+<p>Using cat flag.txt we revealed the flag and completed the challenge! Thank you for visiting and hope it helped!</p>
+
+<p><img src="/assets/Droopy/22.png" alt="flag2" /></p>
+
+  </div><a class="u-url" href="/2019/04/01/droopy-walkthrough.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tony Wu</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Tony Wu</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/qwutony"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">qwutony</span></a></li><li><a href="https://www.twitter.com/Katsurasec"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">Katsurasec</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Just a student with an interest in cyber security and software development.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
