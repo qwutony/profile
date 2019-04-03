@@ -144,4 +144,4 @@ nmap -iL [input file] --script=[list of scripts] -oG [output file]
 
 Visit the download page of the official website at <a href='https://nmap.org/download.html'>https://nmap.org/download.html</a> and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).
 
-
+Thank you for visiting my website! I will be posting more content about Nmap in the future so stay tuned!
