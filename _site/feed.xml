@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T00:57:40-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">Seckids: Basic Introduction to Cross-site Scripting (XSS)</title><link href="http://localhost:4000/2019/04/03/what-is-xss.html" rel="alternate" type="text/html" title="Seckids: Basic Introduction to Cross-site Scripting (XSS)" /><published>2019-04-03T00:00:00-04:00</published><updated>2019-04-03T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/03/what-is-xss</id><content type="html" xml:base="http://localhost:4000/2019/04/03/what-is-xss.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T02:05:38-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">OWASP Top 10: Injection</title><link href="http://localhost:4000/2019/04/03/owasp-injection.html" rel="alternate" type="text/html" title="OWASP Top 10: Injection" /><published>2019-04-03T00:00:00-04:00</published><updated>2019-04-03T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/03/owasp-injection</id><content type="html" xml:base="http://localhost:4000/2019/04/03/owasp-injection.html">&lt;p&gt;The Open Web Application Security Project (OWASP) constantly maintains a list of concerns regarding web application security.&lt;/p&gt;
+
+&lt;p&gt;The OWASP Top 10 is focuses on the most critical and commonly occurring risks in web application security. The latest update in this project is the &lt;em&gt;OWASP Top 10 - 2017 report&lt;/em&gt;. This series will focus on introducing readers to the concepts of these web application threats, as well as talk about countermeasures and prevention methodology.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Injection/1.jpg&quot; alt=&quot;OWASP Injection&quot; width=&quot;500&quot; /&gt; 
+&lt;em&gt;Credits: &lt;strong&gt;Linux Security Blog&lt;/strong&gt; (https://linuxsecurityblog.com/2017/11/23/owasp-a1-injection-cause-and-prevention/)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fundamentals of Injection&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Attack Vectors&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;An injection attack occurs in web applications where untrusted data is passed through an interpreter without adequate code sanitisation. Most likely this is where the application’s input expects one form of data, but the input is not secured from alternatives, leading to an attack being able to inject malicious code.&lt;/p&gt;
+
+&lt;p&gt;Thus, any source of data can be affected by injection attacks. Some examples include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Environment variables&lt;/li&gt;
+  &lt;li&gt;Internal Services and External Web Services (such as SQL Injection etc.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Security Weakness&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Injection-related vulnerabilities are very prevalent in modern web applications primarily because of the continued usage and lack of santisation of legacy code, as well as the minimal security focus in application programming. Injection flaws can easily be detected by most vulnerability scanners, as well as through manual code examination.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Impact&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The impact possibilities that can stream from injection can be severe. Some injections can result in takeover of certain servers, which may then lead to the data breach, disclosure of confidential or private information and denial of access. This may greatly affect the confidence and integrity of businesses if information is leaked.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Types of Injection&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;More detailed explanations of the types of injections will be discussed in future posts. The most common type of injections include:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Query Injection&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SQL Query Injection&lt;/strong&gt;: The attack which a user can inject parts or all of an SQL query, and the data will be processed and executed by the web application.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;LDAP Injection&lt;/strong&gt;: The modification of LDAP statements in a similar fashion to SQL Injection. This may result in the modification of content outside the scope of LDAP.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;XPath Injection&lt;/strong&gt;: The attack technique used to exploit XML Path Language queries that are normally used to navigate XML documents.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Scripting Language Injection&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Null Byte Injection&lt;/strong&gt;: The actual implementation of higher scripting languages is handled by lower languages. A flaw in the handling will allow for attack vectors, such as placing the null byte ‘\0’ to terminate execution of code.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Operating System Injection&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Command Injection&lt;/strong&gt;: A web interface can communicate to a web server and execute operating system commands, such as a bash command. Improper santisation will allow direct access to shell commands.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Prevention Methods&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Input validation&lt;/strong&gt;: whitelist input validation to only provide the user with the characters that are necessary for the task, no more, no less.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Escape user data&lt;/strong&gt;: escape special characters for the interpreter where necesary.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Use secure APIs&lt;/strong&gt;: so that there is no need for interpretation, however in some circumstances these can also contain injection attack vectors.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">The Open Web Application Security Project (OWASP) constantly maintains a list of concerns regarding web application security.</summary></entry><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;First Steps: Information Gathering&lt;/strong&gt;&lt;/p&gt;
 
@@ -249,7 +312,7 @@ nmap &lt;span class=&quot;nt&quot;&gt;-iL&lt;/span&gt; &lt;span class=&quot;o&qu
 
 &lt;p&gt;Visit the download page of the official website at &lt;a href=&quot;https://nmap.org/download.html&quot;&gt;https://nmap.org/download.html&lt;/a&gt; and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).&lt;/p&gt;
 
-&lt;p&gt;Thank you for visiting my website! I will be posting more content about Nmap in the future so stay tuned!&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the first of the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. This topic for this blog post is to introduce readers to Nmap, otherwise known as the Network Mapper.</summary></entry><entry><title type="html">Droopy: v0.2 Walkthrough</title><link href="http://localhost:4000/2019/04/01/droopy-walkthrough.html" rel="alternate" type="text/html" title="Droopy: v0.2 Walkthrough" /><published>2019-04-01T00:00:00-04:00</published><updated>2019-04-01T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/01/droopy-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/01/droopy-walkthrough.html">&lt;p&gt;&lt;strong&gt;This post is an older post from the beginning of my cyber security studies, about 3 months ago&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Thank you for visiting my website! I will be posting more content about Nmap in the future so stay tuned!&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the first of the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. This topic for this blog post is to introduce readers to Nmap, otherwise known as the Network Mapper.</summary></entry><entry><title type="html">Droopy: v0.2 Walkthrough</title><link href="http://localhost:4000/2019/04/01/droopy-walkthrough.html" rel="alternate" type="text/html" title="Droopy: v0.2 Walkthrough" /><published>2019-04-01T00:00:00-04:00</published><updated>2019-04-01T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/01/droopy-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/01/droopy-walkthrough.html">&lt;p&gt;&lt;strong&gt;This post is an older post from the beginning of my cyber security studies, about 3 months ago.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Welcome to the walkthrough about &lt;strong&gt;Droopy&lt;/strong&gt;, a vulnerable boot2root machine that is available on Vulnhub &lt;a href=&quot;https://www.vulnhub.com/entry/droopy-v02,143/&quot;&gt; Droopy (vulnhub link)&lt;/a&gt;. This is the methodology of how I successfully obtained root permissions on the Droopy virtual machine, and obtain the flag that was hidden after getting root. Let’s begin!&lt;/p&gt;
 
@@ -376,4 +439,4 @@ Opening the folder resulted in three files and a secret file.&lt;/p&gt;
 
 &lt;p&gt;Using cat flag.txt we revealed the flag and completed the challenge! Thank you for visiting and hope it helped!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/Droopy/22.png&quot; alt=&quot;flag2&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">This post is an older post from the beginning of my cyber security studies, about 3 months ago</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/Droopy/22.png&quot; alt=&quot;flag2&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">This post is an older post from the beginning of my cyber security studies, about 3 months ago.</summary></entry></feed>
