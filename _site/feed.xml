@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T11:16:55-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T21:45:46-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">FourAndSix: 2.01 Walkthrough</title><link href="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html" rel="alternate" type="text/html" title="FourAndSix: 2.01 Walkthrough" /><published>2019-04-02T00:00:00-04:00</published><updated>2019-04-02T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/02/four-and-six-walkthrough</id><content type="html" xml:base="http://localhost:4000/2019/04/02/four-and-six-walkthrough.html">&lt;p&gt;Welcome to the walkthrough of &lt;strong&gt;FourAndSix: 2.01&lt;/strong&gt;, the second installment of the ‘FourAndSix’ series created by Fred Wemeijer. The objective of this vulnerable machine is to become root and read /root/flag.txt. For more information regarding FourAndSix: 2.01 please visit &lt;a href=&quot;https://www.vulnhub.com/entry/fourandsix-201,266/&quot;&gt;FourAndSix (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;First Steps: Information Gathering&lt;/strong&gt;&lt;/p&gt;
 
@@ -138,7 +138,28 @@ nmap &lt;span class=&quot;nt&quot;&gt;--help&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# Manual for nmap&lt;/span&gt;
 man nmap
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Basic Scan&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a wide range of different techniques that can be used to adjust the output to what the user wants from each scan. In some cirumstances, if the nmap output is needed to be passed/piped into additional outputs, the &lt;em&gt;-oG&lt;/em&gt; flag would be used, for example.&lt;/p&gt;
+
+&lt;p&gt;Using the &lt;em&gt;nmap -h&lt;/em&gt; command will reveal the various options for nmap, all of which are categorised for simplicity. These are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Target Specification&lt;/li&gt;
+  &lt;li&gt;Host Discovery&lt;/li&gt;
+  &lt;li&gt;Scan Techniques&lt;/li&gt;
+  &lt;li&gt;Port Specification and Scan Order&lt;/li&gt;
+  &lt;li&gt;Service/Version Detection&lt;/li&gt;
+  &lt;li&gt;Script Scan&lt;/li&gt;
+  &lt;li&gt;OS Detection&lt;/li&gt;
+  &lt;li&gt;Timing and Performance&lt;/li&gt;
+  &lt;li&gt;Firewall/IDS Evasion and Spoofing&lt;/li&gt;
+  &lt;li&gt;Output&lt;/li&gt;
+  &lt;li&gt;Miscellaneous&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In most circumstances, depending on the users needs, incorporating a several options from the necessary categories would be sufficient for a scan.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Basic Port Scans&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;The most basic port scanning technique is to scan a single IP address using the default nmap command. It scans the 1000 most popular TCP ports and returns the output.&lt;/p&gt;
 
@@ -162,17 +183,48 @@ MAC Address: 00:0C:29:8A:AB:A8 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;VMw
 
 Nmap &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;: 1 IP address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 host up&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; scanned &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;13.28 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Since the default scan only scans the most common ports, the amount of traffic it generates, in addition to the time taken is minimal. However, in circumstances simply scanning the common ports do not reveal the complete picture of all the services that are running. Thus, it is recommended to do a &lt;strong&gt;full port scan&lt;/strong&gt; using the &lt;em&gt;-p&lt;/em&gt; flag to ensure that other ports are accounted for. This flag can also allow for single or ranged port scanning, as shown below:&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Network Sweeping&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Syntax for full port scans&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-p-&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP Address]
+nmap &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 1-65535 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP Address]
 
-&lt;p&gt;In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending &lt;strong&gt;ICMP ping requests&lt;/strong&gt; to each IP address in the network to discover which machines are currently available.&lt;/p&gt;
+&lt;span class=&quot;c&quot;&gt;# Scanning only a single port&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 80 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP Address]
 
-&lt;p&gt;Some machines can be down, filtered or block ICMP requests which may cause the results to differ, but it is generally considered a good reference point to conduct a network sweeping scan.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# nmap -sn [IP Range]&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# sn flag: Ping Scan - disable port scan&lt;/span&gt;
-nmap &lt;span class=&quot;nt&quot;&gt;-sn&lt;/span&gt; 192.168.72.0-254
+&lt;span class=&quot;c&quot;&gt;# Scanning a range of ports&lt;/span&gt;
+nmap &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 1-1024 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;IP Address]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Scenario-based Port Scanning&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Below are some common examples of how to use nmap in penetration testing engagements:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Discovering more information about a completely unknown machine
+```shell
+    &lt;h1 id=&quot;first-use-a-connect-scan-of-the-most-common-1000-ports&quot;&gt;First, use a connect scan of the most common 1000 ports&lt;/h1&gt;
+    &lt;p&gt;nmap -sT -A [IP Address] -oG [Output File Name]&lt;/p&gt;
+    &lt;h1 id=&quot;-st-connect-scan&quot;&gt;-sT: Connect Scan&lt;/h1&gt;
+    &lt;h1 id=&quot;-a-all---os-and-version-detection-script-scans-and-traceroute&quot;&gt;-A: All -&amp;gt; OS and version detection, script scans and traceroute&lt;/h1&gt;
+    &lt;h1 id=&quot;-og-output-results-to-a-file-that-is-grepable-linux&quot;&gt;-oG: Output results to a file that is grepable (linux)&lt;/h1&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;afterwards-use-a-deeper-scan-to-enumerate-all-the-ports&quot;&gt;Afterwards, use a deeper scan to enumerate all the ports&lt;/h1&gt;
+&lt;p&gt;nmap -sT -p- [IP Address] -oG [Output File Name]&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+**Network Sweeping**
+
+In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending **ICMP ping requests** to each IP address in the network to discover which machines are currently available.
+
+Some machines can be down, filtered or block ICMP requests which may cause the results to differ, but it is generally considered a good reference point to conduct a network sweeping scan.
+
+```shell
+# nmap -sn [IP Range]
+# sn flag: Ping Scan - disable port scan
+nmap -sn 192.168.72.0-254
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;strong&gt;How to Download?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Visit the download page of the official website at &lt;a href=&quot;https://nmap.org/download.html&quot;&gt;https://nmap.org/download.html&lt;/a&gt; and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the first of the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. This topic for this blog post is to introduce readers to Nmap, otherwise known as the Network Mapper.</summary></entry></feed>

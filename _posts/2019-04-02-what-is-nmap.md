@@ -30,7 +30,26 @@ nmap --help
 # Manual for nmap
 man nmap
 ```
-**Basic Scan**
+
+There are a wide range of different techniques that can be used to adjust the output to what the user wants from each scan. In some cirumstances, if the nmap output is needed to be passed/piped into additional outputs, the *-oG* flag would be used, for example.
+
+Using the *nmap -h* command will reveal the various options for nmap, all of which are categorised for simplicity. These are:
+
+ - Target Specification
+ - Host Discovery
+ - Scan Techniques
+ - Port Specification and Scan Order
+ - Service/Version Detection
+ - Script Scan
+ - OS Detection
+ - Timing and Performance
+ - Firewall/IDS Evasion and Spoofing
+ - Output
+ - Miscellaneous
+
+ In most circumstances, depending on the users needs, incorporating a several options from the necessary categories would be sufficient for a scan.
+
+**Basic Port Scans**
 
 The most basic port scanning technique is to scan a single IP address using the default nmap command. It scans the 1000 most popular TCP ports and returns the output.
 
@@ -55,6 +74,34 @@ MAC Address: 00:0C:29:8A:AB:A8 (VMware)
 
 Nmap done: 1 IP address (1 host up) scanned in 13.28 seconds
 ```
+Since the default scan only scans the most common ports, the amount of traffic it generates, in addition to the time taken is minimal. However, in circumstances simply scanning the common ports do not reveal the complete picture of all the services that are running. Thus, it is recommended to do a **full port scan** using the *-p* flag to ensure that other ports are accounted for. This flag can also allow for single or ranged port scanning, as shown below:
+
+```shell
+# Syntax for full port scans
+nmap -p- [IP Address]
+nmap -p 1-65535 [IP Address]
+
+# Scanning only a single port
+nmap -p 80 [IP Address]
+
+# Scanning a range of ports
+nmap -p 1-1024 [IP Address]
+```
+**Scenario-based Port Scanning**
+
+Below are some common examples of how to use nmap in penetration testing engagements:
+
+1. Discovering more information about a completely unknown machine
+```shell
+# First, use a connect scan of the most common 1000 ports
+nmap -sT -A [IP Address] -oG [Output File Name]
+# -sT: Connect Scan
+# -A: All -> OS and version detection, script scans and traceroute
+# -oG: Output results to a file that is grepable (linux)
+
+# Afterwards, use a deeper scan to enumerate all the ports
+nmap -sT -p- [IP Address] -oG [Output File Name]
+```
 
 **Network Sweeping**
 
@@ -67,6 +114,7 @@ Some machines can be down, filtered or block ICMP requests which may cause the r
 # sn flag: Ping Scan - disable port scan
 nmap -sn 192.168.72.0-254
 ```
+
 **How to Download?**
 
 Visit the download page of the official website at <a href='https://nmap.org/download.html'>https://nmap.org/download.html</a> and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).

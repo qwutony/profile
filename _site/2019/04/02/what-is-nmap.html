@@ -73,7 +73,28 @@ nmap <span class="nt">--help</span>
 <span class="c"># Manual for nmap</span>
 man nmap
 </code></pre></div></div>
-<p><strong>Basic Scan</strong></p>
+
+<p>There are a wide range of different techniques that can be used to adjust the output to what the user wants from each scan. In some cirumstances, if the nmap output is needed to be passed/piped into additional outputs, the <em>-oG</em> flag would be used, for example.</p>
+
+<p>Using the <em>nmap -h</em> command will reveal the various options for nmap, all of which are categorised for simplicity. These are:</p>
+
+<ul>
+  <li>Target Specification</li>
+  <li>Host Discovery</li>
+  <li>Scan Techniques</li>
+  <li>Port Specification and Scan Order</li>
+  <li>Service/Version Detection</li>
+  <li>Script Scan</li>
+  <li>OS Detection</li>
+  <li>Timing and Performance</li>
+  <li>Firewall/IDS Evasion and Spoofing</li>
+  <li>Output</li>
+  <li>Miscellaneous</li>
+</ul>
+
+<p>In most circumstances, depending on the users needs, incorporating a several options from the necessary categories would be sufficient for a scan.</p>
+
+<p><strong>Basic Port Scans</strong></p>
 
 <p>The most basic port scanning technique is to scan a single IP address using the default nmap command. It scans the 1000 most popular TCP ports and returns the output.</p>
 
@@ -97,17 +118,48 @@ MAC Address: 00:0C:29:8A:AB:A8 <span class="o">(</span>VMware<span class="o">)</
 
 Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>13.28 seconds
 </code></pre></div></div>
+<p>Since the default scan only scans the most common ports, the amount of traffic it generates, in addition to the time taken is minimal. However, in circumstances simply scanning the common ports do not reveal the complete picture of all the services that are running. Thus, it is recommended to do a <strong>full port scan</strong> using the <em>-p</em> flag to ensure that other ports are accounted for. This flag can also allow for single or ranged port scanning, as shown below:</p>
 
-<p><strong>Network Sweeping</strong></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Syntax for full port scans</span>
+nmap <span class="nt">-p-</span> <span class="o">[</span>IP Address]
+nmap <span class="nt">-p</span> 1-65535 <span class="o">[</span>IP Address]
 
-<p>In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending <strong>ICMP ping requests</strong> to each IP address in the network to discover which machines are currently available.</p>
+<span class="c"># Scanning only a single port</span>
+nmap <span class="nt">-p</span> 80 <span class="o">[</span>IP Address]
 
-<p>Some machines can be down, filtered or block ICMP requests which may cause the results to differ, but it is generally considered a good reference point to conduct a network sweeping scan.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># nmap -sn [IP Range]</span>
-<span class="c"># sn flag: Ping Scan - disable port scan</span>
-nmap <span class="nt">-sn</span> 192.168.72.0-254
+<span class="c"># Scanning a range of ports</span>
+nmap <span class="nt">-p</span> 1-1024 <span class="o">[</span>IP Address]
 </code></pre></div></div>
+<p><strong>Scenario-based Port Scanning</strong></p>
+
+<p>Below are some common examples of how to use nmap in penetration testing engagements:</p>
+
+<ol>
+  <li>Discovering more information about a completely unknown machine
+```shell
+    <h1 id="first-use-a-connect-scan-of-the-most-common-1000-ports">First, use a connect scan of the most common 1000 ports</h1>
+    <p>nmap -sT -A [IP Address] -oG [Output File Name]</p>
+    <h1 id="-st-connect-scan">-sT: Connect Scan</h1>
+    <h1 id="-a-all---os-and-version-detection-script-scans-and-traceroute">-A: All -&gt; OS and version detection, script scans and traceroute</h1>
+    <h1 id="-og-output-results-to-a-file-that-is-grepable-linux">-oG: Output results to a file that is grepable (linux)</h1>
+  </li>
+</ol>
+
+<h1 id="afterwards-use-a-deeper-scan-to-enumerate-all-the-ports">Afterwards, use a deeper scan to enumerate all the ports</h1>
+<p>nmap -sT -p- [IP Address] -oG [Output File Name]</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+**Network Sweeping**
+
+In a situation where a user is within an unknown network and has little to no idea what is in the network, it is possible to conduct a network sweeping scan by sending **ICMP ping requests** to each IP address in the network to discover which machines are currently available.
+
+Some machines can be down, filtered or block ICMP requests which may cause the results to differ, but it is generally considered a good reference point to conduct a network sweeping scan.
+
+```shell
+# nmap -sn [IP Range]
+# sn flag: Ping Scan - disable port scan
+nmap -sn 192.168.72.0-254
+</code></pre></div></div>
+
 <p><strong>How to Download?</strong></p>
 
 <p>Visit the download page of the official website at <a href="https://nmap.org/download.html">https://nmap.org/download.html</a> and follow the instructions for your operating system. Some Linux distributions will have Nmap pre-installed (such as Kali Linux).</p>
