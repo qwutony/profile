@@ -74,6 +74,7 @@ MAC Address: 00:0C:29:8A:AB:A8 (VMware)
 
 Nmap done: 1 IP address (1 host up) scanned in 13.28 seconds
 ```
+
 Since the default scan only scans the most common ports, the amount of traffic it generates, in addition to the time taken is minimal. However, in circumstances simply scanning the common ports do not reveal the complete picture of all the services that are running. Thus, it is recommended to do a **full port scan** using the *-p* flag to ensure that other ports are accounted for. This flag can also allow for single or ranged port scanning, as shown below:
 
 ```shell
@@ -87,11 +88,13 @@ nmap -p 80 [IP Address]
 # Scanning a range of ports
 nmap -p 1-1024 [IP Address]
 ```
+
 **Scenario-based Port Scanning**
 
 Below are some common examples of how to use nmap in penetration testing engagements:
 
 1. Discovering more information about a completely unknown machine
+
 ```shell
 # First, use a connect scan of the most common 1000 ports
 nmap -sT -A [IP Address] -oG [Output File Name]
