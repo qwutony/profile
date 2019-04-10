@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>Seckids: The difference between Encoding, Encryption and Hashing | Tony Wu</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Seckids: The difference between Encoding, Encryption and Hashing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Welcome back to the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. Here is an interesting topic that is important for aspiring security students to understand - what is the difference between encoding, encryption and hashing?" />
+<meta property="og:description" content="Welcome back to the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. Here is an interesting topic that is important for aspiring security students to understand - what is the difference between encoding, encryption and hashing?" />
+<link rel="canonical" href="http://localhost:4000/2019/04/09/encode-encrypt-hash.html" />
+<meta property="og:url" content="http://localhost:4000/2019/04/09/encode-encrypt-hash.html" />
+<meta property="og:site_name" content="Tony Wu" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-09T00:00:00-04:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/04/09/encode-encrypt-hash.html"},"@type":"BlogPosting","url":"http://localhost:4000/2019/04/09/encode-encrypt-hash.html","dateModified":"2019-04-09T00:00:00-04:00","datePublished":"2019-04-09T00:00:00-04:00","headline":"Seckids: The difference between Encoding, Encryption and Hashing","description":"Welcome back to the ‘Security:Kids’ series where I try to explain many concepts of cyber security in a simplistic and interesting manner. Here is an interesting topic that is important for aspiring security students to understand - what is the difference between encoding, encryption and hashing?","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tony Wu" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Tony Wu</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">Whoami</a><a class="page-link" href="/content/">List of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Seckids: The difference between Encoding, Encryption and Hashing</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-04-09T00:00:00-04:00" itemprop="datePublished">Apr 9, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Welcome back to the <strong>‘Security:Kids’</strong> series where I try to explain many concepts of cyber security in a simplistic and interesting manner. Here is an interesting topic that is important for aspiring security students to understand - what is the difference between encoding, encryption and hashing?</p>
+
+<p>Before we should try to understand the differences, we should try to find out what is similar between all of these terms.</p>
+
+<p><strong>Data Transformation</strong></p>
+
+<p>The simplest explanation is that encoding, encryption and hashing are all processes for converting data from one format to another. Generally speaking, all three methods transform data from a human-readable state to something that is nearly impossible to read. However that is probably as far as their similarities go.</p>
+
+<p>The fundamental difference between the data transformation techniques depends on the <em>intention and reasoning behind the need to convert data</em>. In other words, why does the data need to be transformed?</p>
+
+<p><strong>Encoding</strong></p>
+
+<p>Encoding is the process of transforming data to another format. Generally, encoding uses a specific publically available algorithm to convert information to cipher text, which is then easily able to be reversed. The most common format for converting letters, symbols and numbers is ASCII, which is an acronym for the American Standard Code for Information Exchange. For more information, see: <a href="https://en.wikipedia.org/wiki/ASCII">ASCII (Wikipedia)</a>.</p>
+
+<p>Fundamentally, the purpose of encoding is to convert data into formats that are easier to be used by other external processes. This can involve converting to a format that is easier to comprehend by the program, or encoding to reduce the overall size of the data.</p>
+
+<p><strong>Encryption</strong></p>
+
+<p>Encryption is also the process of transforming data to another format. The difference is that encryption involves the use of an encryption algorithm to convert the original message, usually in plaintext format, to an unreadable ciphertext. The ciphertext can only be reversed using an encryption key, although it is possible to decrypt a message without a key, but substantial resources are required.</p>
+
+<p>The purpose of encryption is to ensure information can only be consumed by authorized entities. It can be used to prevent data theft since the attacker will be unable to decipher the information. Therefore, encryption is used to for the <strong>security of data</strong>.</p>
+
+<p><strong>Hashing</strong></p>
+
+<p>Hashing also allows for the transformation of data from one format to another. Hashing uses a mathematical algorithm to generate a value (known as a hash or digest) from data. Due to the nature of hashing, it is considered to be a one-way function, meaning that data can be turned into a hash, but a hash would be difficult to reconstruct back to the same data.</p>
+
+<p>Since the hashing of identical data inputs will always result in the same output, hashing can be used to <strong>verify the integrity of data</strong>.</p>
+
+  </div><a class="u-url" href="/2019/04/09/encode-encrypt-hash.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tony Wu</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Tony Wu</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/qwutony"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">qwutony</span></a></li><li><a href="https://www.twitter.com/Katsurasec"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">Katsurasec</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Just a student with an interest in cyber security and software development.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
