@@ -1,7 +1,6 @@
 ---
 layout: home
-sidebar:
-  title: "Sample Title"
-  nav: sidebar-sample
 ---
+The simple blog of an aspiring penetration tester. Please enjoy your stay! - Tony
+
 
