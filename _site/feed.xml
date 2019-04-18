@@ -1,4 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-10T11:37:47-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">Seckids: The difference between Encoding, Encryption and Hashing</title><link href="http://localhost:4000/2019/04/09/encode-encrypt-hash.html" rel="alternate" type="text/html" title="Seckids: The difference between Encoding, Encryption and Hashing" /><published>2019-04-09T00:00:00-04:00</published><updated>2019-04-09T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/09/encode-encrypt-hash</id><content type="html" xml:base="http://localhost:4000/2019/04/09/encode-encrypt-hash.html">&lt;p&gt;Welcome back to the &lt;strong&gt;‘Security:Kids’&lt;/strong&gt; series where I try to explain many concepts of cyber security in a simplistic and interesting manner. Here is an interesting topic that is important for aspiring security students to understand - what is the difference between encoding, encryption and hashing?&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-18T02:40:57-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tony Wu</title><subtitle>Just a student with an interest in cyber security and software development.</subtitle><entry><title type="html">Seattle: v0.3 - Web Application Vulnerable Machine Walkthrough</title><link href="http://localhost:4000/2019/04/11/seattle.html" rel="alternate" type="text/html" title="Seattle: v0.3 - Web Application Vulnerable Machine Walkthrough" /><published>2019-04-11T00:00:00-04:00</published><updated>2019-04-11T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/11/seattle</id><content type="html" xml:base="http://localhost:4000/2019/04/11/seattle.html">&lt;p&gt;Welcome to the walkthrough of Graceful’s &lt;strong&gt;Seattle: v0.3&lt;/strong&gt;, a vulnerable web application that is running on a virtual machine. The website is a very simplistic eCommerce website that sells an assortment of products, and has a login capability to post blogs. There are many simple and commonly seen web application vulnerabilities on the site. For more information, please visit &lt;a href=&quot;https://www.vulnhub.com/entry/seattle-v03,145/&quot;&gt;Seattle (vulnhub link)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When first visiting the website, you are greeted with a fairly standard front page. There are several tabs, and a variety of links down below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/1.PNG&quot; alt=&quot;front page&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As with all web applications, the preliminary enumeration is essential! We will conduct a dirb scan to learn more about the website:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/2.PNG&quot; alt=&quot;dirb scan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From there we discover the first potential problem of the web application –&amp;gt; &lt;strong&gt;Local File Disclosure&lt;/strong&gt;. This allows the attacker to see the path to the webroot or certain files. This vulnerability may allow attackers to be able to execute exploits that require the path of the website.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/3.PNG&quot; alt=&quot;local file disclosure&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;During this time, we also ran a nikto scan. This revealed additional information about the website.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/4.PNG&quot; alt=&quot;nikto scan&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Following OSVDB-5292 link that was revealed by nikto, we discover that it was actually a link to the phpinfo file of the website –&amp;gt; &lt;strong&gt;Exposed phpinfo() vulnerability&lt;/strong&gt;. An exposed phpinfo() may be able to reveal and execute directory traversal attacks, as well as find out more information about the website structure.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/5.PNG&quot; alt=&quot;phpinfo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At the same time, it was also discovered that the brochure/catalogue has an item parameter, which allowed for &lt;strong&gt;Local File Inclusion&lt;/strong&gt; and &lt;strong&gt;Directory Traversal&lt;/strong&gt;. This means by using the infamous ‘../’ it is possible to escape the web directory and into other areas of the machine, as seen by downloading the /etc/passwd file in this circumstance. This allows the arbitrary access and reading of any file on the file system.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/6.PNG&quot; alt=&quot;LFI&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is also possible to use burp to intercept the request and manipulate it to achieve the same result:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/7.PNG&quot; alt=&quot;LFIx2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The website also has &lt;strong&gt;Persistent XSS&lt;/strong&gt;, which is achieved by logging in with any account, and then posting a malicious script into the blog post. In this case, I chose to steal the ‘document.cookie’. There is also &lt;strong&gt;Reflected XSS&lt;/strong&gt;, which is exploited by closing ending the parameter using quotations and then inserting a malicious script in the author parameter in blog.php.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/8.PNG&quot; alt=&quot;persistent xss&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The web application also has &lt;strong&gt;Error-based SQL Injection&lt;/strong&gt;, which is achieved because the login usermail input is not sanitised properly, allowing a user to be able to enumerate the users database. In this case I used SQLMap to automatically test for the vulnerability:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/9.PNG&quot; alt=&quot;error sql&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The command is on the last line of the terminal in the image above.&lt;/p&gt;
+
+&lt;p&gt;Then a subsequent command is able to retrieve all the information from the database. You can use the ‘–all’ flag, or the ‘–tables’ flag to do so.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/10.PNG&quot; alt=&quot;error sql database&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Interestingly, the session cookie looked a little familiar, so I used a MD5 hash decrypter and discovered that the session was actually just the username email hashed. This is an example of an &lt;strong&gt;Insecure Session Cookie&lt;/strong&gt;, and can allow attackers to gain unauthorised access to other user sessions.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/11.PNG&quot; alt=&quot;insecure session cookie&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Circling back to the user interface, I noticed that some parameters allowed for &lt;strong&gt;Insecure Direct Object Referencing&lt;/strong&gt;. This means user-supplied input can have direct access to objects stored locally, which in some circumstances means that attackers can bypass authorization and directly access various resources on the website.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/12.PNG&quot; alt=&quot;insecure direct object referencing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The same webpage also has a &lt;strong&gt;Blind SQL Injection&lt;/strong&gt; (not quite because technically it is an error-based injection…there’s nothing blind about it). This is in the ‘prod’ parameter, and allows further enumeration of the database. SQLMap doesn’t seem to pick it up, so instead I opted to do it manually:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/13.PNG&quot; alt=&quot;blind sql injection&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The furthest I got was finding the database name, in which it is sufficient to determine that this vulnerability does exist.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/14.PNG&quot; alt=&quot;blind sql injection x2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, I realised that there was &lt;strong&gt;Username Enumeration&lt;/strong&gt; possibilities, when after typing an invalid credential the website would respond by informing that this user does not exist.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Seattle/15.PNG&quot; alt=&quot;username enumeration&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In total, all the vulnerabilities mentioned on the Vulnhub website were found! These include (from the vulnhub website):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SQL Injection (Error-based)&lt;/li&gt;
+  &lt;li&gt;SQL Injection (Blind)&lt;/li&gt;
+  &lt;li&gt;Reflected Cross-Site Scripting&lt;/li&gt;
+  &lt;li&gt;Stored Cross-Site Scripting&lt;/li&gt;
+  &lt;li&gt;Insecure Direct-Object Reference&lt;/li&gt;
+  &lt;li&gt;Username Enumeration&lt;/li&gt;
+  &lt;li&gt;Path Traversal&lt;/li&gt;
+  &lt;li&gt;Exposed phpinfo()&lt;/li&gt;
+  &lt;li&gt;Exposed Administrative Interface&lt;/li&gt;
+  &lt;li&gt;Weak Admin Credentials&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thank you very much for reading this and hope this walkthrough helped!&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to the walkthrough of Graceful’s Seattle: v0.3, a vulnerable web application that is running on a virtual machine. The website is a very simplistic eCommerce website that sells an assortment of products, and has a login capability to post blogs. There are many simple and commonly seen web application vulnerabilities on the site. For more information, please visit Seattle (vulnhub link).</summary></entry><entry><title type="html">Seckids: The difference between Encoding, Encryption and Hashing</title><link href="http://localhost:4000/2019/04/09/encode-encrypt-hash.html" rel="alternate" type="text/html" title="Seckids: The difference between Encoding, Encryption and Hashing" /><published>2019-04-09T00:00:00-04:00</published><updated>2019-04-09T00:00:00-04:00</updated><id>http://localhost:4000/2019/04/09/encode-encrypt-hash</id><content type="html" xml:base="http://localhost:4000/2019/04/09/encode-encrypt-hash.html">&lt;p&gt;Welcome back to the &lt;strong&gt;‘Security:Kids’&lt;/strong&gt; series where I try to explain many concepts of cyber security in a simplistic and interesting manner. Here is an interesting topic that is important for aspiring security students to understand - what is the difference between encoding, encryption and hashing?&lt;/p&gt;
 
 &lt;p&gt;Before we should try to understand the differences, we should try to find out what is similar between all of these terms.&lt;/p&gt;
 
